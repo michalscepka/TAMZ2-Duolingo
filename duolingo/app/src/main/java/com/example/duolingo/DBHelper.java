@@ -3,10 +3,8 @@ package com.example.duolingo;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -17,9 +15,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String ITEM_COLUMN_LANGUAGE = "language";
     public static final String ITEM_COLUMN_DESCRIPTION = "description";
     public static final String ITEM_COLUMN_DIFFICULTY = "difficulty";
-    public static final String ITEM_COLUMN_USER_ID = "user_id";
-    public static final String ITEM_COLUMN_USERNAME = "username";
+    public static final String ITEM_COLUMN_SCORE = "score";
     public static final String ITEM_COLUMN_IS_DONE = "is_done";
+    public static final String ITEM_COLUMN_LEVEL_ID = "level_id";
+    public static final String ITEM_COLUMN_TYPE = "type";
+    public static final String ITEM_COLUMN_CORRECT_ANSWER = "correct_answer";
+    public static final String ITEM_COLUMN_DATA_ID = "data_id";
+    public static final String ITEM_COLUMN_SOURCE = "source";
+    public static final String ITEM_COLUMN_NAME = "name";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -31,73 +34,59 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(lesson_id INTEGER PRIMARY KEY, " +
                 "language TEXT, " +
                 "description TEXT," +
-                "difficulty INTEGER)");
-        db.execSQL("CREATE TABLE user " +
-                "(user_id INTEGER PRIMARY KEY, " +
-                "username TEXT)");
-        db.execSQL("CREATE TABLE progress " +
-                "(user_id INTEGER," +
-                "lesson_id INTEGER," +
-                "is_done BOOLEAN," +
-                "FOREIGN KEY (user_id) REFERENCES user(user_id)," +
+                "difficulty INTEGER," +
+                "score INTEGER," +
+                "is_done BOOLEAN)");
+        db.execSQL("CREATE TABLE level " +
+                "(level_id INTEGER PRIMARY KEY, " +
+                "lesson_id INTEGER, " +
+                "type TEXT, " +
+                "correct_answer TEXT, " +
                 "FOREIGN KEY (lesson_id) REFERENCES lesson(lesson_id))");
+        db.execSQL("CREATE TABLE data " +
+                "(data_id INTEGER PRIMARY KEY, " +
+                "level_id INT, " +
+                "source TEXT, " +
+                "name TEXT, " +
+                "FOREIGN KEY (level_id) REFERENCES level(level_id))");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS lesson");
-        db.execSQL("DROP TABLE IF EXISTS user");
-        db.execSQL("DROP TABLE IF EXISTS progress");
+        db.execSQL("DROP TABLE IF EXISTS level");
+        db.execSQL("DROP TABLE IF EXISTS data");
         onCreate(db);
     }
 
     // LESSON
-    public boolean insertLesson(String language, String description, int difficulty) {
+    public boolean insertLesson(String language, String description, int difficulty, int score, int isDone) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("language", language);
         contentValues.put("description", description);
         contentValues.put("difficulty", difficulty);
+        contentValues.put("score", score);
+        contentValues.put("is_done", isDone);
 
         long insertedId = db.insert("lesson", null, contentValues);
         return insertedId != -1;
     }
 
-    /*public boolean deleteItem (int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        try {
-            db.execSQL("DELETE FROM items WHERE id=" + id + "");
-        }
-        catch (SQLException e) {
-            return false;
-        }
-        return true;
-    }*/
-
     //Cursor representuje vracena data
     public Cursor getLessonData(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT le.lesson_id, language, description, difficulty, p.is_done FROM lesson le LEFT JOIN progress p ON le.lesson_id = p.lesson_id WHERE le.lesson_id=" + id + "", null);
+        return db.rawQuery("SELECT le.lesson_id, language, description, difficulty, score, is_done, lvl.level_id, type, correct_answer " +
+                "FROM lesson le " +
+                "JOIN level lvl ON le.lesson_id = lvl.lesson_id " +
+                "WHERE le.lesson_id=" + id + "", null);
     }
 
-    /*public boolean updateItem (Integer id, String name, String cost) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        try {
-            db.execSQL("UPDATE items SET name ='" + name + "', cost =" + cost + " WHERE id=" + id + "");
-        }
-        catch (SQLException e) {
-            return false;
-        }
-        return true;
-    }*/
-
-    public ArrayList<Lesson> getLessonsList(int user_id) {
+    public ArrayList<Lesson> getLessonsList() {
         ArrayList<Lesson> arrayList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res;
-        res = db.rawQuery("SELECT le.lesson_id, language, description, difficulty, p.is_done " +
-                "FROM lesson le JOIN progress p ON le.lesson_id = p.lesson_id " +
-                "WHERE p.user_id = " + user_id, null);
+        res = db.rawQuery("SELECT lesson_id, language, description, difficulty, score, is_done FROM lesson", null);
         res.moveToFirst();
 
         while(!res.isAfterLast()) {
@@ -105,8 +94,9 @@ public class DBHelper extends SQLiteOpenHelper {
             String language = res.getString(res.getColumnIndex(ITEM_COLUMN_LANGUAGE));
             String description = res.getString(res.getColumnIndex(ITEM_COLUMN_DESCRIPTION));
             int difficulty = res.getInt(res.getColumnIndex(ITEM_COLUMN_DIFFICULTY));
-            Integer isDone = res.getInt(res.getColumnIndex(ITEM_COLUMN_IS_DONE));
-            arrayList.add(new Lesson(id, language, description, difficulty, isDone));
+            int score = res.getInt(res.getColumnIndex(ITEM_COLUMN_SCORE));
+            int isDone = res.getInt(res.getColumnIndex(ITEM_COLUMN_IS_DONE));
+            arrayList.add(new Lesson(id, language, description, difficulty, score, isDone));
             res.moveToNext();
         }
 
@@ -114,41 +104,34 @@ public class DBHelper extends SQLiteOpenHelper {
         return arrayList;
     }
 
-    /*public int removeAll() {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor c = db.rawQuery("SELECT COUNT(*) FROM items", null);
-        c.moveToFirst();
-
-        db.execSQL("DELETE FROM items");
-
-        return c.getInt(0);
-    }*/
-
-    // USER
-    public boolean insertUser(String username) {
+    // LEVEL
+    public boolean insertLevel(int lessonId, String type, String correctAnswer) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("username", username);
+        contentValues.put("lesson_id", lessonId);
+        contentValues.put("type", type);
+        contentValues.put("correct_answer", correctAnswer);
 
-        long insertedId = db.insert("user", null, contentValues);
+        long insertedId = db.insert("level", null, contentValues);
         return insertedId != -1;
     }
 
-    public Cursor getUserData(int id) {
+    public Cursor getLevelData(int lessonId, int levelId) {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("select * from user where user_id=" + id + "", null);
+        return db.rawQuery("SELECT d.data_id, d.level_id, d.source, d.name " +
+                "FROM level le JOIN data d ON le.level_id = d.level_id " +
+                "WHERE le.level_id=" + levelId + " AND le.lesson_id=" + lessonId +"", null);
     }
 
-    // PROGRESS
-    public boolean insertProgress(int user_id, int lesson_id, boolean is_done) {
+    // DATA
+    public boolean insertData(int levelId, String source, String name) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("user_id", user_id);
-        contentValues.put("lesson_id", lesson_id);
-        contentValues.put("is_done", is_done);
+        contentValues.put("level_id", levelId);
+        contentValues.put("source", source);
+        contentValues.put("name", name);
 
-        long insertedId = db.insert("progress", null, contentValues);
+        long insertedId = db.insert("data", null, contentValues);
         return insertedId != -1;
     }
 }

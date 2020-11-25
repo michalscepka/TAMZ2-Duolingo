@@ -1,0 +1,14 @@
+Lesson 1
+Level 1
+cat,dog,bird,mouse
+Level 2
+elephant,fish,lion,wolf
+Level 3
+cat,fish,dog,tiger
+Lesson2
+Level 1
+turtle,dog,fish,zebra
+Level 2
+penguin,cat,bird,wolf
+Level 3
+lion,elephant,mouse,tiger

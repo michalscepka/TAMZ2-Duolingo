@@ -1,0 +1,74 @@
+{
+  "lessons": [
+    {
+      "lesson_id": 1,
+      "name": "zvirata",
+      "description": "cool zvirata",
+      "levels": [
+        {
+          "level_id": 1,
+          "type": "pick",
+          "elements": [
+            "cat",
+            "dog",
+            "bird",
+            "turtle"
+          ],
+          "answer": "cat"
+        },
+        {
+          "level_id": 2,
+          "type": "listening",
+          "source": "cesta/ksouboru"
+        },
+        {
+          "level_id": 3,
+          "type": "pick2",
+          "img_source": "cesta/ksouboru",
+          "choices": [
+            "cat",
+            "dog",
+            "bird",
+            "turtle"
+          ],
+          "answer": "dog"
+        }
+      ]
+    },
+    {
+      "lesson_id": 2,
+      "name": "mesta",
+      "description": "cool mesta",
+      "levels": [
+        {
+          "level_id": 1,
+          "type": "pick",
+          "elements": [
+            "cat",
+            "dog",
+            "bird",
+            "turtle"
+          ],
+          "answer": "cat"
+        },
+        {
+          "level_id": 2,
+          "type": "listening",
+          "source": "cesta/ksouboru"
+        },
+        {
+          "level_id": 3,
+          "type": "pick2",
+          "img_source": "cesta/ksouboru",
+          "choices": [
+            "cat",
+            "dog",
+            "bird",
+            "turtle"
+          ],
+          "answer": "dog"
+        }
+      ]
+    }
+  ]
+}

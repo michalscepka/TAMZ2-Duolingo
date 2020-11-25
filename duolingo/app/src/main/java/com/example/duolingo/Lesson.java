@@ -1,23 +1,26 @@
 package com.example.duolingo;
 
+import java.util.ArrayList;
+
 public class Lesson {
 
     public int id;
     public String language;
     public String description;
     public int difficulty;
-    public Integer isDone;
+    public int score;
+    public int isDone;
+    public ArrayList<Level> levels = new ArrayList<>();
 
-    public Lesson(int id, String language, String description, int difficulty, Integer isDone) {
-        this(id, language, description, difficulty);
-        this.isDone = isDone;
-    }
+    public Lesson(){}
 
-    public Lesson(int id, String language, String description, int difficulty) {
+    public Lesson(int id, String language, String description, int difficulty, int score, int isDone) {
         this.id = id;
         this.language = language;
         this.description = description;
         this.difficulty = difficulty;
+        this.score = score;
+        this.isDone = isDone;
     }
 
     @Override
