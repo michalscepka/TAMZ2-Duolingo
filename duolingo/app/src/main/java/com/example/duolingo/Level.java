@@ -5,17 +5,25 @@ import java.util.ArrayList;
 public class Level {
 
     public int id;
-    public int lessonId;
     public String type;
     public String correctAnswer;
-    ArrayList<Data> data = new ArrayList<>();
+    ArrayList<String> data = new ArrayList<>();
 
     public Level(){}
 
-    public Level(int id, int lessonId, String type, String correctAnswer) {
+    public Level(int id, String type, String correctAnswer) {
         this.id = id;
-        this.lessonId = lessonId;
         this.type = type;
         this.correctAnswer = correctAnswer;
+    }
+
+    @Override
+    public String toString() {
+        return "Level{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", correctAnswer='" + correctAnswer + '\'' +
+                ", data=" + data +
+                '}';
     }
 }

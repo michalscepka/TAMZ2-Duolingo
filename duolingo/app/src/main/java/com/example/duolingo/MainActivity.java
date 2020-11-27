@@ -3,7 +3,10 @@ package com.example.duolingo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -11,12 +14,20 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     DBHelper mydb;
+    JsonHelper myJson;
     ListView itemListView;
+    ArrayList<Lesson> lessons;
     int user_id = 1;
     String[] inputText;
     ImageView myImage;
@@ -29,14 +40,21 @@ public class MainActivity extends AppCompatActivity {
         mydb = new DBHelper(this);
         //initDB();
 
+        myJson = new JsonHelper();
+        lessons = myJson.loadLessons(getAssets());
+        for(Lesson item : lessons) {
+            Log.d("log ", item.toString());
+        }
+
         /*myImage = findViewById(R.id.imageView);
         String mDrawableName = "dog";
         int resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
         myImage.setImageResource(resID);*/
 
 
-        ArrayList<Lesson> arrayList = mydb.getLessonsList();
-        ArrayAdapter<Lesson> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayList);
+        //ArrayList<Lesson> arrayList = mydb.getLessonsList();
+        //ArrayAdapter<Lesson> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayList);
+        ArrayAdapter<Lesson> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lessons);
 
         itemListView = findViewById(R.id.listView1);
         itemListView.setAdapter(arrayAdapter);
@@ -45,12 +63,13 @@ public class MainActivity extends AppCompatActivity {
 
             Intent intent = new Intent(getApplicationContext(), DisplayLessonActivity.class);
             intent.putExtra("id", selectedLesson.id);
+            Log.d("log", "\n\nID " + selectedLesson.id);
             startActivity(intent);
             finish();
         });
     }
 
-    public void initDB() {
+    /*public void initDB() {
         mydb.insertLesson("english", "Zvirata", 2, 55, 1);
         mydb.insertLesson("english", "Objekty", 3, 0, 0);
 
@@ -75,34 +94,6 @@ public class MainActivity extends AppCompatActivity {
         mydb.insertData(3, "dog", "dog");
         mydb.insertData(3, "bird", "bird");
         mydb.insertData(3, "turtle", "turtle");
-    }
-
-    /*public void loadLessons() {
-        AssetManager assetManager = getAssets();
-        InputStream input;
-        try {
-            input = assetManager.open("data.json");
-
-            int size = input.available();
-            byte[] buffer = new byte[size];
-            input.read(buffer);
-            input.close();
-
-            String jsonString = new String(buffer);
-            Log.d("level ", jsonString);
-
-            JSONObject obj = new JSONObject(jsonString);
-
-            JSONArray arr = obj.getJSONArray("lessons");
-            for (int i = 0; i < arr.length(); i++)
-            {
-                String lesson_id = arr.getJSONObject(i).getString("lesson_id");
-                Log.d("level ", lesson_id);
-
-            }
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
-        }
     }*/
 
     @Override

@@ -2,71 +2,85 @@
   "lessons": [
     {
       "lesson_id": 1,
+      "language": "english",
       "name": "zvirata",
       "description": "cool zvirata",
+      "difficulty": 2,
       "levels": [
         {
           "level_id": 1,
-          "type": "pick",
-          "elements": [
+          "type": "pickFrom4",
+          "data": [
             "cat",
             "dog",
             "bird",
             "turtle"
           ],
-          "answer": "cat"
+          "correct_answer": "cat"
         },
         {
           "level_id": 2,
-          "type": "listening",
-          "source": "cesta/ksouboru"
+          "type": "pickFrom4",
+          "data": [
+            "elephant",
+            "fish",
+            "lion",
+            "wolf"
+          ],
+          "correct_answer": "fish"
         },
         {
           "level_id": 3,
-          "type": "pick2",
-          "img_source": "cesta/ksouboru",
-          "choices": [
+          "type": "pickFrom4",
+          "data": [
             "cat",
+            "fish",
             "dog",
-            "bird",
-            "turtle"
+            "tiger"
           ],
-          "answer": "dog"
+          "correct_answer": "dog"
         }
       ]
     },
     {
       "lesson_id": 2,
-      "name": "mesta",
-      "description": "cool mesta",
+      "language": "english",
+      "name": "barvy",
+      "description": "cool barvy",
+      "difficulty": 3,
       "levels": [
         {
           "level_id": 1,
-          "type": "pick",
-          "elements": [
-            "cat",
+          "type": "pickFrom4",
+          "data": [
+            "turtle",
             "dog",
-            "bird",
-            "turtle"
+            "fish",
+            "zebra"
           ],
-          "answer": "cat"
+          "correct_answer": "zebra"
         },
         {
           "level_id": 2,
-          "type": "listening",
-          "source": "cesta/ksouboru"
+          "type": "pickFrom4",
+          "data": [
+            "penguin",
+            "cat",
+            "bird",
+            "wolf"
+          ],
+          "correct_answer": "penguin"
         },
         {
-          "level_id": 3,
-          "type": "pick2",
-          "img_source": "cesta/ksouboru",
-          "choices": [
-            "cat",
-            "dog",
-            "bird",
-            "turtle"
+          "level_id": 1,
+          "type": "pickFrom4",
+          "data": [
+            "lion",
+            "elephant",
+            "mouse",
+            "tiger"
           ],
-          "answer": "dog"
+          "correct_answer": "lion"
         }
       ]
     }

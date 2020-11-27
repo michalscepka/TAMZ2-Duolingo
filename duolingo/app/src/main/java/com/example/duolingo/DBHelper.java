@@ -96,7 +96,7 @@ public class DBHelper extends SQLiteOpenHelper {
             int difficulty = res.getInt(res.getColumnIndex(ITEM_COLUMN_DIFFICULTY));
             int score = res.getInt(res.getColumnIndex(ITEM_COLUMN_SCORE));
             int isDone = res.getInt(res.getColumnIndex(ITEM_COLUMN_IS_DONE));
-            arrayList.add(new Lesson(id, language, description, difficulty, score, isDone));
+            arrayList.add(new Lesson(id, language, " ", description, difficulty, score, isDone));
             res.moveToNext();
         }
 

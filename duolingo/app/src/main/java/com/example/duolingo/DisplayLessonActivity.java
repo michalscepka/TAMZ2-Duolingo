@@ -10,14 +10,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class DisplayLessonActivity extends AppCompatActivity {
 
     private DBHelper mydb;
+    private JsonHelper myJson;
     private TextView descriptionTextView;
     private TextView difficultyTextView;
     private TextView languageTextView;
     private TextView textView;
-    private Lesson lesson;
+
+    //TODO prepsat tak at si ten list muzu posilat mezi aktivitami
+    private ArrayList<Lesson> lessons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +33,35 @@ public class DisplayLessonActivity extends AppCompatActivity {
         difficultyTextView = findViewById(R.id.difficultyTextView);
         languageTextView = findViewById(R.id.languageTextView);
         textView = findViewById(R.id.textView);
-        lesson = new Lesson();
 
-        mydb = new DBHelper(this);
+        myJson = new JsonHelper();
+        lessons = myJson.loadLessons(getAssets());
+        for(Lesson item : lessons) {
+            Log.d("log", item.toString());
+        }
+
+        Intent intent = getIntent();
+        if(intent !=null) {
+            //ziskam ID, ktere se ma editovat/zobrazit/mazat - poslane z hlavni aktivity
+            int lessonId = intent.getIntExtra("id", 0);
+            if (lessonId > 0) {
+                descriptionTextView.setText(lessons.get(lessonId-1).description);
+                difficultyTextView.setText(String.format("Obtížnost: %s/5", lessons.get(lessonId-1).difficulty));
+                languageTextView.setText(String.format("Jazyk: %s", lessons.get(lessonId-1).language));
+
+                StringBuilder sb = new StringBuilder();
+                for(Level level : lessons.get(lessonId-1).levels) {
+                    sb.append(level.id).append("; ").append(level.type).append("; ").append(level.correctAnswer).append("\n");
+                    for(String data : level.data) {
+                        sb.append("\t").append(data).append("\n");
+                    }
+                }
+
+                textView.setText(sb.toString());
+            }
+        }
+
+        /*mydb = new DBHelper(this);
         Intent intent = getIntent();
         if(intent !=null) {
             //ziskam ID, ktere se ma editovat/zobrazit/mazat - poslane z hlavni aktivity
@@ -38,10 +69,10 @@ public class DisplayLessonActivity extends AppCompatActivity {
             if (lessonId > 0) {
                 getDataFromDB(lessonId);
             }
-        }
+        }*/
     }
 
-    private void getDataFromDB(int lessonId) {
+    /*private void getDataFromDB(int lessonId) {
         //z db vytahnu zaznam pod hledanym ID
         Cursor rs = mydb.getLessonData(lessonId);
         rs.moveToFirst();
@@ -55,7 +86,7 @@ public class DisplayLessonActivity extends AppCompatActivity {
         do {
             Level level = new Level();
             level.id = rs.getInt(rs.getColumnIndex(DBHelper.ITEM_COLUMN_LEVEL_ID));
-            level.lessonId = rs.getInt(rs.getColumnIndex(DBHelper.ITEM_COLUMN_LESSON_ID));
+            //level.lessonId = rs.getInt(rs.getColumnIndex(DBHelper.ITEM_COLUMN_LESSON_ID));
             level.type = rs.getString(rs.getColumnIndex(DBHelper.ITEM_COLUMN_TYPE));
             level.correctAnswer = rs.getString(rs.getColumnIndex(DBHelper.ITEM_COLUMN_CORRECT_ANSWER));
             lesson.levels.add(level);
@@ -77,7 +108,7 @@ public class DisplayLessonActivity extends AppCompatActivity {
                 data.level_id = c.getInt(c.getColumnIndex(DBHelper.ITEM_COLUMN_LEVEL_ID));
                 data.source = c.getString(c.getColumnIndex(DBHelper.ITEM_COLUMN_SOURCE));
                 data.name = c.getString(c.getColumnIndex(DBHelper.ITEM_COLUMN_NAME));
-                lesson.levels.get(i).data.add(data);
+                //lesson.levels.get(i).data.add(data);
             } while (c.moveToNext());
             c.close();
         }
@@ -89,18 +120,11 @@ public class DisplayLessonActivity extends AppCompatActivity {
         StringBuilder sb = new StringBuilder();
         for(Level level : lesson.levels) {
             sb.append(level.id).append(" ").append(level.type).append(" ").append(level.correctAnswer).append('\n');
-            for(Data data : level.data) {
-                sb.append(data.name).append('\n');
-            }
+
         }
 
         textView.setText(sb.toString());
-    }
-
-    private void getLevelData() {
-
-        //Cursor c = mydb.getLevelData(lesson.levels)
-    }
+    }*/
 
     @Override
     public void onBackPressed() {
