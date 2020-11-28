@@ -1,8 +1,9 @@
 package com.example.duolingo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Level {
+public class Level implements Serializable {
 
     public int id;
     public String type;

@@ -1,5 +1,6 @@
 package com.example.duolingo;
 
+import android.content.Context;
 import android.content.res.AssetManager;
 
 import org.json.JSONArray;
@@ -10,17 +11,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class JsonHelper {
+public class JsonParser {
 
     //TODO nacitat json z webu
 
-    public JsonHelper() {}
+    Context context;
 
-    public ArrayList<Lesson> loadLessons(AssetManager assetManager) {
+    public JsonParser(Context context) {
+        this.context = context;
+    }
+
+    public ArrayList<Lesson> loadLessons() {
 
         ArrayList<Lesson> lessons = new ArrayList<>();
 
-        //AssetManager assetManager = getAssets();
+        AssetManager assetManager = context.getAssets();
         InputStream input;
         try {
             input = assetManager.open("data.json");
