@@ -11,12 +11,12 @@
           "type": "pickFrom4",
           "description": "Na kterém obrázku je \"kočka\"?",
           "data": [
-            "cat1",
-            "dog1",
+            "cat",
+            "dog",
             "bird",
             "turtle"
           ],
-          "correct_answer": "cat1"
+          "correct_answer": "cat"
         },
         {
           "level_id": 2,
@@ -26,7 +26,7 @@
             "elephant",
             "fish",
             "lion",
-            "wolf2"
+            "wolf"
           ],
           "correct_answer": "fish"
         },
@@ -35,12 +35,12 @@
           "type": "pickFrom4",
           "description": "Na kterém obrázku je \"pes\"?",
           "data": [
-            "cat2",
+            "cat",
             "fish",
-            "dog2",
+            "dog",
             "tiger"
           ],
-          "correct_answer": "dog2"
+          "correct_answer": "dog"
         }
       ]
     },
@@ -53,14 +53,14 @@
         {
           "level_id": 1,
           "type": "pickFrom4",
-          "description": "Na kterém obrázku je \"zebra\"?",
+          "description": "Na kterém obrázku je \"želva\"?",
           "data": [
             "turtle",
-            "dog2",
+            "dog",
             "fish",
             "zebra"
           ],
-          "correct_answer": "zebra"
+          "correct_answer": "turtle"
         },
         {
           "level_id": 2,
@@ -68,9 +68,9 @@
           "description": "Na kterém obrázku je \"tučňák\"?",
           "data": [
             "penguin",
-            "cat2",
+            "cat",
             "bird",
-            "wolf1"
+            "wolf"
           ],
           "correct_answer": "penguin"
         },

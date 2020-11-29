@@ -1,44 +1,23 @@
 package com.example.duolingo;
 
-import android.content.Context;
-import android.content.res.AssetManager;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 public class JsonParser {
 
-    //TODO nacitat json z webu
+    public JsonParser() {}
 
-    Context context;
-
-    public JsonParser(Context context) {
-        this.context = context;
-    }
-
-    public ArrayList<Lesson> loadLessons() {
+    public ArrayList<Lesson> loadLessons(String jsonString) {
 
         ArrayList<Lesson> lessons = new ArrayList<>();
 
-        AssetManager assetManager = context.getAssets();
-        InputStream input;
         try {
-            input = assetManager.open("data.json");
-
-            int size = input.available();
-            byte[] buffer = new byte[size];
-            input.read(buffer);
-            input.close();
-
-            String jsonString = new String(buffer);
-
             JSONObject obj = new JSONObject(jsonString);
             JSONArray lessonsArr = obj.getJSONArray("lessons");
+
             for (int i = 0; i < lessonsArr.length(); i++) {
                 Lesson lesson = new Lesson();
                 lesson.id = lessonsArr.getJSONObject(i).getInt("lesson_id");
@@ -63,7 +42,7 @@ public class JsonParser {
 
                 lessons.add(lesson);
             }
-        } catch (IOException | JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 

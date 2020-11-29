@@ -3,28 +3,23 @@ package com.example.duolingo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class DisplayLessonActivity extends AppCompatActivity {
 
     private TextView descriptionTextView;
-    private ImageView img1;
-    private ImageView img2;
-    private ImageView img3;
-    private ImageView img4;
+    private ArrayList<ImageView> imageViews;
+    private ArrayList<TextView> textViews;
     private Lesson lesson;
     private int currentLevel = 0;
+    // TODO score, ktere se pak zapise do databaze
+    private int score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +27,18 @@ public class DisplayLessonActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_lesson);
 
         descriptionTextView = findViewById(R.id.descriptionTextView);
-        img1 = findViewById(R.id.img1);
-        img2 = findViewById(R.id.img2);
-        img3 = findViewById(R.id.img3);
-        img4 = findViewById(R.id.img4);
+
+        imageViews = new ArrayList<>();
+        imageViews.add(findViewById(R.id.img1));
+        imageViews.add(findViewById(R.id.img2));
+        imageViews.add(findViewById(R.id.img3));
+        imageViews.add(findViewById(R.id.img4));
+
+        textViews = new ArrayList<>();
+        textViews.add(findViewById(R.id.imgText1));
+        textViews.add(findViewById(R.id.imgText2));
+        textViews.add(findViewById(R.id.imgText3));
+        textViews.add(findViewById(R.id.imgText4));
 
         Intent intent = getIntent();
         if(intent !=null) {
@@ -47,14 +50,12 @@ public class DisplayLessonActivity extends AppCompatActivity {
 
     private void setLevel(Level level) {
         descriptionTextView.setText(level.description);
-        img1.setImageResource(getImage(level, 0));
-        img1.setTag(level.data.get(0));
-        img2.setImageResource(getImage(level, 1));
-        img2.setTag(level.data.get(1));
-        img3.setImageResource(getImage(level, 2));
-        img3.setTag(level.data.get(2));
-        img4.setImageResource(getImage(level, 3));
-        img4.setTag(level.data.get(3));
+
+        for (int i = 0; i < imageViews.size(); i++) {
+            imageViews.get(i).setImageResource(getImage(level, i));
+            imageViews.get(i).setTag(level.data.get(i));
+            textViews.get(i).setText(level.data.get(i));
+        }
     }
 
     private int getImage(Level level, int index) {

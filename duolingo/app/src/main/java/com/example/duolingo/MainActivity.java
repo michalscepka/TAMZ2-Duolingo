@@ -8,11 +8,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,9 +27,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mydb = new DBHelper(this);
+        String output = "";
+        try {
+             output = new JsonTask().execute("https://json.extendsclass.com/bin/7da9b9ca57aa").get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        //Log.d("log", output);
 
-        myJson = new JsonParser(getApplicationContext());
-        lessons = myJson.loadLessons();
+
+        myJson = new JsonParser();
+        lessons = myJson.loadLessons(output);
         for(Lesson item : lessons) {
             Log.d("log ", item.toString());
         }
