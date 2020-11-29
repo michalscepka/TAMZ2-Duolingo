@@ -2,9 +2,8 @@
   "lessons": [
     {
       "lesson_id": 1,
-      "language": "english",
-      "name": "zvirata",
-      "difficulty": 2,
+      "name": "Zvířata",
+      "difficulty": 1,
       "levels": [
         {
           "level_id": 1,
@@ -36,9 +35,9 @@
           "description": "Na kterém obrázku je \"pes\"?",
           "data": [
             "cat",
-            "fish",
+            "tiger",
             "dog",
-            "tiger"
+            "fish"
           ],
           "correct_answer": "dog"
         }
@@ -46,9 +45,8 @@
     },
     {
       "lesson_id": 2,
-      "language": "english",
-      "name": "barvy",
-      "difficulty": 3,
+      "name": "Barvy",
+      "difficulty": 2,
       "levels": [
         {
           "level_id": 1,
@@ -67,10 +65,10 @@
           "type": "pickFrom4",
           "description": "Na kterém obrázku je \"tučňák\"?",
           "data": [
-            "penguin",
             "cat",
             "bird",
-            "wolf"
+            "wolf",
+            "penguin"
           ],
           "correct_answer": "penguin"
         },
@@ -79,9 +77,9 @@
           "type": "pickFrom4",
           "description": "Na kterém obrázku je \"lev\"?",
           "data": [
-            "lion",
             "elephant",
             "mouse",
+            "lion",
             "tiger"
           ],
           "correct_answer": "lion"

@@ -6,31 +6,23 @@ import java.util.ArrayList;
 public class Lesson implements Serializable {
 
     public int id;
-    public String language;
     public String name;
     public int difficulty;
     public int score;
-    public int isDone;
     public ArrayList<Level> levels = new ArrayList<>();
 
     public Lesson(){}
 
-    public Lesson(int id, String language, String name, int difficulty, int score, int isDone) {
+    public Lesson(int id, String name, int difficulty, int score) {
         this.id = id;
-        this.language = language;
         this.name = name;
         this.difficulty = difficulty;
         this.score = score;
-        this.isDone = isDone;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Lekce ").append(id).append("; obtiznost ").append(difficulty).append("/5");
-        if(isDone == 1)
-            sb.append("; splněno");
-        return sb.toString();
+        return "Lekce " + id + ": " + name + "; obtížnost: " + difficulty + "/5" + "; Score: " + score;
     }
 
     /*@Override

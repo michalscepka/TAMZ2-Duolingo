@@ -21,7 +21,6 @@ public class JsonParser {
             for (int i = 0; i < lessonsArr.length(); i++) {
                 Lesson lesson = new Lesson();
                 lesson.id = lessonsArr.getJSONObject(i).getInt("lesson_id");
-                lesson.language = lessonsArr.getJSONObject(i).getString("language");
                 lesson.name = lessonsArr.getJSONObject(i).getString("name");
                 lesson.difficulty = lessonsArr.getJSONObject(i).getInt("difficulty");
                 JSONArray levelsArr = lessonsArr.getJSONObject(i).getJSONArray("levels");

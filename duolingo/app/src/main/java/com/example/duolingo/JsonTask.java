@@ -9,8 +9,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-//TODO mozna prepsat z asyncTask na threads
-
 public class JsonTask extends AsyncTask<String, String, String> {
 
     @Override

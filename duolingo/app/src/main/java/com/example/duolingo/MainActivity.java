@@ -29,11 +29,11 @@ public class MainActivity extends AppCompatActivity {
         mydb = new DBHelper(this);
         String output = "";
         try {
-             output = new JsonTask().execute("https://json.extendsclass.com/bin/7da9b9ca57aa").get();
+             output = new JsonTask().execute("https://json.extendsclass.com/bin/134cf168eaf5").get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
-        //Log.d("log", output);
+        Log.d("log", output);
 
 
         myJson = new JsonParser();
@@ -83,10 +83,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-        Toast.makeText(this, "onBackPressed", Toast.LENGTH_SHORT).show();
     }
 }
