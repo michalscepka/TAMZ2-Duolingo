@@ -4,41 +4,43 @@
       "lesson_id": 1,
       "language": "english",
       "name": "zvirata",
-      "description": "cool zvirata",
       "difficulty": 2,
       "levels": [
         {
           "level_id": 1,
           "type": "pickFrom4",
+          "description": "Na kterém obrázku je \"kočka\"?",
           "data": [
-            "cat",
-            "dog",
+            "cat1",
+            "dog1",
             "bird",
             "turtle"
           ],
-          "correct_answer": "cat"
+          "correct_answer": "cat1"
         },
         {
           "level_id": 2,
           "type": "pickFrom4",
+          "description": "Na kterém obrázku je \"ryba\"?",
           "data": [
             "elephant",
             "fish",
             "lion",
-            "wolf"
+            "wolf2"
           ],
           "correct_answer": "fish"
         },
         {
           "level_id": 3,
           "type": "pickFrom4",
+          "description": "Na kterém obrázku je \"pes\"?",
           "data": [
-            "cat",
+            "cat2",
             "fish",
-            "dog",
+            "dog2",
             "tiger"
           ],
-          "correct_answer": "dog"
+          "correct_answer": "dog2"
         }
       ]
     },
@@ -46,15 +48,15 @@
       "lesson_id": 2,
       "language": "english",
       "name": "barvy",
-      "description": "cool barvy",
       "difficulty": 3,
       "levels": [
         {
           "level_id": 1,
           "type": "pickFrom4",
+          "description": "Na kterém obrázku je \"zebra\"?",
           "data": [
             "turtle",
-            "dog",
+            "dog2",
             "fish",
             "zebra"
           ],
@@ -63,17 +65,19 @@
         {
           "level_id": 2,
           "type": "pickFrom4",
+          "description": "Na kterém obrázku je \"tučňák\"?",
           "data": [
             "penguin",
-            "cat",
+            "cat2",
             "bird",
-            "wolf"
+            "wolf1"
           ],
           "correct_answer": "penguin"
         },
         {
           "level_id": 1,
           "type": "pickFrom4",
+          "description": "Na kterém obrázku je \"lev\"?",
           "data": [
             "lion",
             "elephant",

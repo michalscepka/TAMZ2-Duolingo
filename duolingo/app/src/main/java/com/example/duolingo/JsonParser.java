@@ -44,7 +44,6 @@ public class JsonParser {
                 lesson.id = lessonsArr.getJSONObject(i).getInt("lesson_id");
                 lesson.language = lessonsArr.getJSONObject(i).getString("language");
                 lesson.name = lessonsArr.getJSONObject(i).getString("name");
-                lesson.description = lessonsArr.getJSONObject(i).getString("description");
                 lesson.difficulty = lessonsArr.getJSONObject(i).getInt("difficulty");
                 JSONArray levelsArr = lessonsArr.getJSONObject(i).getJSONArray("levels");
 
@@ -52,6 +51,7 @@ public class JsonParser {
                     Level level = new Level();
                     level.id = levelsArr.getJSONObject(j).getInt("level_id");
                     level.type = levelsArr.getJSONObject(j).getString("type");
+                    level.description = levelsArr.getJSONObject(j).getString("description");
                     level.correctAnswer = levelsArr.getJSONObject(j).getString("correct_answer");
                     JSONArray dataArr = levelsArr.getJSONObject(j).getJSONArray("data");
 

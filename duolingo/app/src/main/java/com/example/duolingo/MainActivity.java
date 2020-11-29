@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     JsonParser myJson;
     ListView itemListView;
     ArrayList<Lesson> lessons;
-    ImageView myImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +33,6 @@ public class MainActivity extends AppCompatActivity {
         for(Lesson item : lessons) {
             Log.d("log ", item.toString());
         }
-
-        /*myImage = findViewById(R.id.imageView);
-        String mDrawableName = "dog";
-        int resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
-        myImage.setImageResource(resID);*/
 
         ArrayAdapter<Lesson> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lessons);
 
