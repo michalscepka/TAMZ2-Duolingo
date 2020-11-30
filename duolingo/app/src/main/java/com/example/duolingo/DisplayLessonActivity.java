@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class DisplayLessonActivity extends AppCompatActivity {
 
+    DBHelper mydb;
     private TextView descriptionTextView;
     private ArrayList<ImageView> imageViews;
     private ArrayList<TextView> textViews;
@@ -20,11 +21,14 @@ public class DisplayLessonActivity extends AppCompatActivity {
     private int currentLevel = 0;
     // TODO score, ktere se pak zapise do databaze
     private int score;
+    private int userId = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_lesson);
+
+        mydb = new DBHelper(this);
 
         descriptionTextView = findViewById(R.id.descriptionTextView);
 
@@ -64,18 +68,22 @@ public class DisplayLessonActivity extends AppCompatActivity {
 
     public void onImageClick(View view) {
         if(String.valueOf(view.getTag()).equals(lesson.levels.get(currentLevel).correctAnswer)) {
-            Toast.makeText(this, "Good", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "+10", Toast.LENGTH_SHORT).show();
             if(!(++currentLevel >= lesson.levels.size())) {
                 setLevel(lesson.levels.get(currentLevel));
+                score += 10;
             }
             else {
+                score += 10;
+                mydb.updateLesson(lesson.id, userId, score);
                 finish();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         }
         else {
-            Toast.makeText(this, "Bad", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "-5", Toast.LENGTH_SHORT).show();
+            score -= 5;
         }
     }
 
