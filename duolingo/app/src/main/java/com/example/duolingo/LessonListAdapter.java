@@ -56,7 +56,7 @@ public class LessonListAdapter extends ArrayAdapter<Lesson> {
             imgStar2.setImageResource(R.drawable.star_off);
             imgStar3.setImageResource(R.drawable.star_off);
         }
-        else if(lesson.score < lessonMaxScore) {
+        else if(lesson.score > lessonMaxScore * 2/3 && lesson.score < lessonMaxScore) {
             imgStar1.setImageResource(R.drawable.star_on);
             imgStar2.setImageResource(R.drawable.star_on);
             imgStar3.setImageResource(R.drawable.star_off);

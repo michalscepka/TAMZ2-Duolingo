@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -16,11 +15,11 @@ import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
-    DBHelper mydb;
-    JsonParser myJson;
+    DBHelper database;
+    JsonParser json;
     ListView itemListView;
     ArrayList<Lesson> lessons;
-    int userId = 3; //TODO brat z persistentStorage
+    int userId = 1; //TODO brat z persistentStorage
 
     //TODO vymyslet kam dat audio
     //TODO odebrat obtiznost
@@ -30,14 +29,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mydb = new DBHelper(this);
-
-        /*mydb.insertUzivatel("hrac");
-        mydb.insertUzivatel("hrac2");
-        mydb.insertLesson(1, 1, 50);
-        mydb.insertLesson(2, 1, 1);
-        mydb.insertLesson(1, 2, 10);
-        mydb.insertUzivatel("hrac3");*/
+        database = new DBHelper(this);
+        createDefaultUser();
 
         String output = "";
         try {
@@ -47,13 +40,13 @@ public class MainActivity extends AppCompatActivity {
         }
         //Log.d("log", output);
 
-        myJson = new JsonParser();
-        lessons = myJson.loadLessons(output);
+        json = new JsonParser();
+        lessons = json.loadLessons(output);
         /*for(Lesson item : lessons) {
             Log.d("log ", item.toString());
         }*/
 
-        ArrayList<LessonDB> lessonDBS = mydb.getLessonsList(userId);
+        ArrayList<LessonDB> lessonDBS = database.getLessonsList(userId);
         for(LessonDB item : lessonDBS) {
             Log.d("result", item.toString());
         }
@@ -67,11 +60,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        //ArrayAdapter<Lesson> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lessons);
         LessonListAdapter adapter = new LessonListAdapter(getApplicationContext(), R.layout.list_lesson_layout, lessons);
 
         itemListView = findViewById(R.id.listView1);
-        //itemListView.setAdapter(arrayAdapter);
         itemListView.setAdapter(adapter);
         itemListView.setOnItemClickListener((parent, view, position, id) -> {
             Lesson selectedLesson = (Lesson) (itemListView.getItemAtPosition(position));
@@ -82,6 +73,12 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+    }
+
+    private void createDefaultUser() {
+        if(database.getUserData(1).getCount() == 0) {
+            database.insertUzivatel("Defult");
+        }
     }
 
     @Override

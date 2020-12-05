@@ -13,21 +13,21 @@ import java.util.ArrayList;
 
 public class DisplayLessonActivity extends AppCompatActivity {
 
-    DBHelper mydb;
+    DBHelper database;
     private TextView descriptionTextView;
     private ArrayList<ImageView> imageViews;
     private ArrayList<TextView> textViews;
     private Lesson lesson;
     private int currentLevel = 0;
     private int score;
-    private int userId = 3;
+    private int userId = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_lesson);
 
-        mydb = new DBHelper(this);
+        database = new DBHelper(this);
 
         descriptionTextView = findViewById(R.id.descriptionTextView);
 
@@ -74,7 +74,7 @@ public class DisplayLessonActivity extends AppCompatActivity {
             }
             else {
                 score += 10;
-                mydb.updateLesson(lesson.id, userId, score);
+                database.updateLesson(lesson.id, userId, score);
                 finish();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
