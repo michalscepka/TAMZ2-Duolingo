@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     int userId = 1; //TODO brat z persistentStorage
 
     //TODO vymyslet kam dat audio
-    //TODO odebrat obtiznost
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

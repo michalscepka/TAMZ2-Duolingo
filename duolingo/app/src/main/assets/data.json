@@ -3,7 +3,6 @@
     {
       "lesson_id": 1,
       "name": "Zvířata",
-      "difficulty": 1,
       "levels": [
         {
           "level_id": 1,
@@ -46,7 +45,6 @@
     {
       "lesson_id": 2,
       "name": "Barvy",
-      "difficulty": 2,
       "levels": [
         {
           "level_id": 1,

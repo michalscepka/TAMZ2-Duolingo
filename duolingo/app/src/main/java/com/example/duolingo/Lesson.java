@@ -7,22 +7,20 @@ public class Lesson implements Serializable {
 
     public int id;
     public String name;
-    public int difficulty;
     public int score;
     public ArrayList<Level> levels = new ArrayList<>();
 
     public Lesson(){}
 
-    public Lesson(int id, String name, int difficulty, int score) {
+    public Lesson(int id, String name, int score) {
         this.id = id;
         this.name = name;
-        this.difficulty = difficulty;
         this.score = score;
     }
 
     @Override
     public String toString() {
-        return "Lekce " + id + ": " + name + "; obtížnost: " + difficulty + "/5" + "; Score: " + score;
+        return "Lekce " + id + ": " + name + "; obtížnost: " + "; Score: " + score;
     }
 
     /*@Override
