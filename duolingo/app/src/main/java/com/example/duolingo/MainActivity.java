@@ -67,11 +67,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        //TODO udelat vlastni adapter?
-        ArrayAdapter<Lesson> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lessons);
+        //ArrayAdapter<Lesson> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lessons);
+        LessonListAdapter adapter = new LessonListAdapter(getApplicationContext(), R.layout.list_lesson_layout, lessons);
 
         itemListView = findViewById(R.id.listView1);
-        itemListView.setAdapter(arrayAdapter);
+        //itemListView.setAdapter(arrayAdapter);
+        itemListView.setAdapter(adapter);
         itemListView.setOnItemClickListener((parent, view, position, id) -> {
             Lesson selectedLesson = (Lesson) (itemListView.getItemAtPosition(position));
 
