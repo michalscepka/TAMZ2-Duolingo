@@ -19,7 +19,6 @@ public class DisplayLessonActivity extends AppCompatActivity {
     private ArrayList<TextView> textViews;
     private Lesson lesson;
     private int currentLevel = 0;
-    // TODO score, ktere se pak zapise do databaze
     private int score;
     private int userId = 3;
 

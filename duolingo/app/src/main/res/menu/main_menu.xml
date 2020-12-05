@@ -4,6 +4,4 @@
 
     <item android:title="Můj profil"
         android:id="@+id/my_profile"/>
-    <item android:title="Lekce"
-        android:id="@+id/lessons"/>
 </menu>

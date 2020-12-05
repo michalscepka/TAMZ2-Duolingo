@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     int userId = 3; //TODO brat z persistentStorage
 
     //TODO vymyslet kam dat audio
+    //TODO odebrat obtiznost
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,19 +93,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.my_profile)
-        {
-            /*Intent intent = new Intent(getApplicationContext(), DisplayItemActivity.class);
-            intent.putExtra("id", 0);
+        if(id == R.id.my_profile) {
+            Intent intent = new Intent(getApplicationContext(), MyProfileActivity.class);
             startActivity(intent);
-            finish();*/
-            Toast.makeText(this, "My profile", Toast.LENGTH_LONG).show();
-        }
-
-        if (id == R.id.lessons)
-        {
-            Toast.makeText(this, "Lessons", Toast.LENGTH_LONG).show();
-            //recreate();
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
