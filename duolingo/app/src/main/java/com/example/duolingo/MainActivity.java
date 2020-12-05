@@ -45,22 +45,9 @@ public class MainActivity extends AppCompatActivity {
             Log.d("log ", item.toString());
         }*/
 
-        ArrayList<LessonDB> lessonDBS = database.getLessonsList(userId);
-        for(LessonDB item : lessonDBS) {
-            Log.d("result", item.toString());
-        }
-
-        //priradit score k lekcim
-        for(int i = 0; i < lessons.size(); i++) {
-            for(int j = 0; j < lessonDBS.size(); j++) {
-                if(lessons.get(i).id == lessonDBS.get(j).lessonId) {
-                    lessons.get(i).score = lessonDBS.get(j).score;
-                }
-            }
-        }
+        assignScore();
 
         LessonListAdapter adapter = new LessonListAdapter(getApplicationContext(), R.layout.list_lesson_layout, lessons);
-
         itemListView = findViewById(R.id.listView1);
         itemListView.setAdapter(adapter);
         itemListView.setOnItemClickListener((parent, view, position, id) -> {
@@ -77,6 +64,20 @@ public class MainActivity extends AppCompatActivity {
     private void createDefaultUser() {
         if(database.getUserData(1).getCount() == 0) {
             database.insertUzivatel("Defult");
+        }
+    }
+
+    private void assignScore() {
+        //vytahnout score aktualniho uzivatele z DB
+        ArrayList<LessonDB> lessonDBS = database.getLessonsList(userId);
+
+        //priradit score k lekcim
+        for(int i = 0; i < lessons.size(); i++) {
+            for(int j = 0; j < lessonDBS.size(); j++) {
+                if(lessons.get(i).id == lessonDBS.get(j).lessonId) {
+                    lessons.get(i).score = lessonDBS.get(j).score;
+                }
+            }
         }
     }
 

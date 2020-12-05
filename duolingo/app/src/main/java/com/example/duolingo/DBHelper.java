@@ -50,7 +50,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return insertedId != -1;
     }
 
-    //TODO
     public Cursor getUserData(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * " +

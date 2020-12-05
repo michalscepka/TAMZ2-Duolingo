@@ -51,12 +51,17 @@ public class LessonListAdapter extends ArrayAdapter<Lesson> {
             lessonMaxScore += 10;
         }
 
-        if(lesson.score > lessonMaxScore/3 && lesson.score <= lessonMaxScore * 2/3) {
+        if(lesson.score < lessonMaxScore/3) {
+            imgStar1.setImageResource(R.drawable.star_off);
+            imgStar2.setImageResource(R.drawable.star_off);
+            imgStar3.setImageResource(R.drawable.star_off);
+        }
+        else if(lesson.score >= lessonMaxScore/3 && lesson.score <= lessonMaxScore/2) {
             imgStar1.setImageResource(R.drawable.star_on);
             imgStar2.setImageResource(R.drawable.star_off);
             imgStar3.setImageResource(R.drawable.star_off);
         }
-        else if(lesson.score > lessonMaxScore * 2/3 && lesson.score < lessonMaxScore) {
+        else if(lesson.score > lessonMaxScore/2 && lesson.score < lessonMaxScore) {
             imgStar1.setImageResource(R.drawable.star_on);
             imgStar2.setImageResource(R.drawable.star_on);
             imgStar3.setImageResource(R.drawable.star_off);
@@ -65,10 +70,6 @@ public class LessonListAdapter extends ArrayAdapter<Lesson> {
             imgStar1.setImageResource(R.drawable.star_on);
             imgStar2.setImageResource(R.drawable.star_on);
             imgStar3.setImageResource(R.drawable.star_on);
-        } else {
-            imgStar1.setImageResource(R.drawable.star_off);
-            imgStar2.setImageResource(R.drawable.star_off);
-            imgStar3.setImageResource(R.drawable.star_off);
         }
 
         return row;
