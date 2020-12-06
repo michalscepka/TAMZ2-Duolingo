@@ -20,7 +20,7 @@ public class DisplayLessonActivity extends AppCompatActivity {
     private Lesson lesson;
     private int currentLevel = 0;
     private int score;
-    private int userId = 1;
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +46,10 @@ public class DisplayLessonActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if(intent !=null) {
             lesson = (Lesson) intent.getSerializableExtra("lesson");
+            userId = (int) intent.getIntExtra("userId", 1);
 
             setLevel(lesson.levels.get(currentLevel));
+            setTitle("Lekce " + lesson.id + " - " + lesson.name);
         }
     }
 
@@ -65,6 +67,7 @@ public class DisplayLessonActivity extends AppCompatActivity {
         return getResources().getIdentifier(level.data.get(index), "drawable", getPackageName());
     }
 
+    //TODO zobrazovat pocet prictenych a odectenych bodu
     public void onImageClick(View view) {
         if(String.valueOf(view.getTag()).equals(lesson.levels.get(currentLevel).correctAnswer)) {
             Toast.makeText(this, "+10", Toast.LENGTH_SHORT).show();
@@ -81,7 +84,7 @@ public class DisplayLessonActivity extends AppCompatActivity {
             }
         }
         else {
-            Toast.makeText(this, "-5", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "-5", Toast.LENGTH_SHORT).show();
             score -= 5;
         }
     }

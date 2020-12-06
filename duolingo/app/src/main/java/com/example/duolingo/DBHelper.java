@@ -36,25 +36,54 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS lesson");
-        db.execSQL("DROP TABLE IF EXISTS uzivatel");
+        db.execSQL("DROP TABLE IF EXISTS user");
         onCreate(db);
     }
 
     // USER
-    public boolean insertUzivatel(String name) {
+    public int insertUser(String name) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
 
         long insertedId = db.insert("user", null, contentValues);
-        return insertedId != -1;
+        return (int)insertedId;
     }
 
     public Cursor getUserData(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * " +
+        return db.rawQuery("SELECT user_id, name " +
                 "FROM user " +
                 "WHERE user_id=" + id + "", null);
+    }
+
+    public ArrayList<UserDB> getUsersList() {
+        ArrayList<UserDB> arrayList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("SELECT user_id, name FROM user", null);
+        res.moveToFirst();
+
+        while (!res.isAfterLast()) {
+            int userId = res.getInt(res.getColumnIndex(ITEM_COLUMN_USER_ID));
+            String name = res.getString(res.getColumnIndex(ITEM_COLUMN_NAME));
+            arrayList.add(new UserDB(userId, name));
+            res.moveToNext();
+        }
+        res.close();
+
+        return arrayList;
+    }
+
+    public boolean deleteUser(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        try {
+            db.execSQL("DELETE FROM user WHERE user_id=" + id);
+            db.execSQL("DELETE FROM lesson WHERE user_id=" + id);
+        }
+        catch (SQLException e) {
+            return false;
+        }
+        return true;
     }
 
     // LESSON
@@ -83,6 +112,17 @@ public class DBHelper extends SQLiteOpenHelper {
         else {
             insertLesson(lessonId, userId, newScore);
         }
+    }
+
+    public boolean deleteLessonsForUser(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        try {
+            db.execSQL("DELETE FROM lesson WHERE user_id=" + id);
+        }
+        catch (SQLException e) {
+            return false;
+        }
+        return true;
     }
 
     public boolean existsLessonRecord(int lessonId, int userId) {
