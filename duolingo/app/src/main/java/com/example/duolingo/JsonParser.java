@@ -31,6 +31,7 @@ public class JsonParser {
                     level.description = levelsArr.getJSONObject(j).getString("description");
                     level.correctAnswer = levelsArr.getJSONObject(j).getString("correct_answer");
                     JSONArray dataArr = levelsArr.getJSONObject(j).getJSONArray("data");
+                    level.soundFile = levelsArr.getJSONObject(j).getString("sound_file");
 
                     for(int k = 0; k < dataArr.length(); k++) {
                         level.data.add(dataArr.getString(k));

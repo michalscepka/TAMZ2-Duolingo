@@ -24,8 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences sharedPref;
     private UserDB activeProfile;
 
-    //TODO vymyslet kam dat audio
-    //TODO mozna udelat lekci s akcelerometrem
+    //TODO mozna udelat restart lekce s akcelerometrem
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
         c.close();
 
         setTitle(String.format("Lekce uživatele '%s'", activeProfile.name));
-
-        Toast.makeText(this, String.valueOf(sharedPref.getInt("activeProfile", 100)), Toast.LENGTH_SHORT).show();
 
         String output = "";
         try {
@@ -83,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createDefaultUser() {
-        String defaultName = "Default";
+        String defaultName = "Hráč";
         database.insertUser(defaultName);
         sharedPref.edit().putInt("activeProfile", 1).apply();
         activeProfile = new UserDB(1, defaultName);

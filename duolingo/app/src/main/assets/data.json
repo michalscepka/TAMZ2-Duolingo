@@ -14,10 +14,25 @@
             "bird",
             "turtle"
           ],
-          "correct_answer": "cat"
+          "correct_answer": "cat",
+          "sound_file": ""
         },
         {
           "level_id": 2,
+          "type": "sound",
+          "description": "Vyberte co slyšíte",
+          "data": [
+            "my",
+            "dog is a",
+            "drama",
+            "king",
+            "queen"
+          ],
+          "correct_answer": "My dog is a drama king",
+          "sound_file": "sound1"
+        },
+        {
+          "level_id": 3,
           "type": "pickFrom4",
           "description": "Na kterém obrázku je \"ryba\"?",
           "data": [
@@ -26,10 +41,25 @@
             "lion",
             "wolf"
           ],
-          "correct_answer": "fish"
+          "correct_answer": "fish",
+          "sound_file": ""
         },
         {
-          "level_id": 3,
+          "level_id": 4,
+          "type": "sound",
+          "description": "Vyberte co slyšíte",
+          "data": [
+            "I",
+            "love",
+            "pizza",
+            "hamburgers",
+            "starving"
+          ],
+          "correct_answer": "I love hamburgers",
+          "sound_file": "sound2"
+        },
+        {
+          "level_id": 5,
           "type": "pickFrom4",
           "description": "Na kterém obrázku je \"pes\"?",
           "data": [
@@ -38,7 +68,8 @@
             "dog",
             "fish"
           ],
-          "correct_answer": "dog"
+          "correct_answer": "dog",
+          "sound_file": ""
         }
       ]
     },
@@ -56,10 +87,25 @@
             "fish",
             "zebra"
           ],
-          "correct_answer": "turtle"
+          "correct_answer": "turtle",
+          "sound_file": ""
         },
         {
           "level_id": 2,
+          "type": "sound",
+          "description": "Vyberte co slyšíte",
+          "data": [
+            "fishes",
+            "can",
+            "swim",
+            "jump",
+            "run"
+          ],
+          "correct_answer": "Fishes can swim",
+          "sound_file": "sound3"
+        },
+        {
+          "level_id": 3,
           "type": "pickFrom4",
           "description": "Na kterém obrázku je \"tučňák\"?",
           "data": [
@@ -68,10 +114,11 @@
             "wolf",
             "penguin"
           ],
-          "correct_answer": "penguin"
+          "correct_answer": "penguin",
+          "sound_file": ""
         },
         {
-          "level_id": 1,
+          "level_id": 4,
           "type": "pickFrom4",
           "description": "Na kterém obrázku je \"lev\"?",
           "data": [
@@ -80,7 +127,8 @@
             "lion",
             "tiger"
           ],
-          "correct_answer": "lion"
+          "correct_answer": "lion",
+          "sound_file": ""
         }
       ]
     }

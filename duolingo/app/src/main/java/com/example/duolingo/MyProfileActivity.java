@@ -42,9 +42,10 @@ public class MyProfileActivity extends AppCompatActivity {
         activeProfileText.setText(String.format("Aktivní profil: %s", users.get(sharedPref.getInt("activeProfile", 1) - 1).name));
 
         //zmena profilu
-        spinner = (Spinner) findViewById(R.id.spinner);
+        spinner = findViewById(R.id.spinner);
         updateSpinner();
 
+        //TODO zkusit nezobrazovat furt default
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

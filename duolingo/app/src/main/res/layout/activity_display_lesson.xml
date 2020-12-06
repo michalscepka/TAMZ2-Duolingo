@@ -33,10 +33,10 @@
         android:id="@+id/img2"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginStart="44dp"
         android:layout_marginTop="96dp"
+        android:layout_marginEnd="24dp"
         android:onClick="onImageClick"
-        app:layout_constraintStart_toEndOf="@+id/img1"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bird" />
 
@@ -55,10 +55,10 @@
         android:id="@+id/img4"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginStart="44dp"
         android:layout_marginTop="60dp"
+        android:layout_marginEnd="24dp"
         android:onClick="onImageClick"
-        app:layout_constraintStart_toEndOf="@+id/img3"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img2"
         app:srcCompat="@drawable/bird" />
 
@@ -115,4 +115,106 @@
         app:layout_constraintEnd_toEndOf="@+id/img4"
         app:layout_constraintStart_toStartOf="@+id/img4"
         app:layout_constraintTop_toBottomOf="@+id/img4" />
+
+    <Button
+        android:id="@+id/buttonPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="132dp"
+        android:text="Přehrát"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="onButtonPlayClick" />
+
+    <TextView
+        android:id="@+id/textAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonPlay" />
+
+    <Button
+        android:id="@+id/buttonOption1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/buttonOption4"
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="onButtonOptionClick" />
+
+    <Button
+        android:id="@+id/buttonOption2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/buttonOption4"
+        app:layout_constraintEnd_toStartOf="@+id/buttonOption3"
+        app:layout_constraintStart_toEndOf="@+id/buttonOption1"
+        android:onClick="onButtonOptionClick" />
+
+    <Button
+        android:id="@+id/buttonOption3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/buttonOption5"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="onButtonOptionClick" />
+
+    <Button
+        android:id="@+id/buttonOption4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="24dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCheck"
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="onButtonOptionClick" />
+
+    <Button
+        android:id="@+id/buttonOption5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="24dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCheck"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="onButtonOptionClick" />
+
+    <Button
+        android:id="@+id/buttonCheck"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="Check"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="onButtonCheckClick" />
+
+    <Button
+        android:id="@+id/buttonClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        android:text="Vymazat"
+        app:layout_constraintBottom_toTopOf="@+id/buttonOption3"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="onButtonClearClick" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

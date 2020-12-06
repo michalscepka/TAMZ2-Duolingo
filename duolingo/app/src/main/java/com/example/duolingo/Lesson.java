@@ -22,17 +22,4 @@ public class Lesson implements Serializable {
     public String toString() {
         return "Lekce " + id + ": " + name + "; obtížnost: " + "; Score: " + score;
     }
-
-    /*@Override
-    public String toString() {
-        return "Lesson{" +
-                "id=" + id +
-                ", language='" + language + '\'' +
-                ", name='" + name + '\'' +
-                ", difficulty=" + difficulty +
-                ", score=" + score +
-                ", isDone=" + isDone +
-                ", levels=" + levels +
-                '}';
-    }*/
 }

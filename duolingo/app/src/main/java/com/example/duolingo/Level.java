@@ -9,15 +9,18 @@ public class Level implements Serializable {
     public String type;
     public String description;
     public String correctAnswer;
-    ArrayList<String> data = new ArrayList<>();
+    public ArrayList<String> data = new ArrayList<>();
+    public String soundFile;
 
     public Level(){}
 
-    public Level(int id, String type, String description, String correctAnswer) {
+    public Level(int id, String type, String description, String correctAnswer, ArrayList<String> data, String soundFile) {
         this.id = id;
         this.type = type;
         this.description = description;
         this.correctAnswer = correctAnswer;
+        this.data = data;
+        this.soundFile = soundFile;
     }
 
     @Override
