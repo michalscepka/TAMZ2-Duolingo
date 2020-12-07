@@ -7,9 +7,9 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -17,9 +17,10 @@ public class DisplayLessonActivity extends AppCompatActivity {
 
     private DBHelper database;
     private TextView descriptionTextView;
+    private TextView scoreText;
     private ArrayList<ImageView> imageViews;
     private ArrayList<TextView> textViews;
-    private Button playButton;
+    private ImageButton playButton;
     private TextView answerText;
     private ArrayList<Button> answerButtons;
     private Button checkButton;
@@ -38,6 +39,8 @@ public class DisplayLessonActivity extends AppCompatActivity {
         database = new DBHelper(this);
 
         descriptionTextView = findViewById(R.id.descriptionTextView);
+        scoreText = findViewById(R.id.textScore);
+        scoreText.setText("");
 
         imageViews = new ArrayList<>();
         imageViews.add(findViewById(R.id.img1));
@@ -79,7 +82,7 @@ public class DisplayLessonActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if(intent !=null) {
             lesson = (Lesson) intent.getSerializableExtra("lesson");
-            userId = (int) intent.getIntExtra("userId", 1);
+            userId = intent.getIntExtra("userId", 1);
 
             setLevel(lesson.levels.get(currentLevel));
             setTitle("Lekce " + lesson.id + " - " + lesson.name);
@@ -96,7 +99,7 @@ public class DisplayLessonActivity extends AppCompatActivity {
                 textViews.get(i).setText(level.data.get(i));
             }
 
-            //odkryt potrebne prvky
+            //zakryt/odkryt potrebne prvky
             for(ImageView item : imageViews) {
                 item.setVisibility(View.VISIBLE);
             }
@@ -119,7 +122,7 @@ public class DisplayLessonActivity extends AppCompatActivity {
                 answerButtons.get(i).setText(level.data.get(i));
             }
 
-            //odkryt potrebne prvky
+            //zakryt/odkryt potrebne prvky
             for(ImageView item : imageViews) {
                 item.setVisibility(View.GONE);
             }
@@ -146,6 +149,7 @@ public class DisplayLessonActivity extends AppCompatActivity {
             setNextLevel();
         } else {
             score -= 5;
+            //showScore();
         }
     }
 
@@ -161,12 +165,20 @@ public class DisplayLessonActivity extends AppCompatActivity {
     }
 
     public void onButtonCheckClick(View view) {
-        String userAnswer = answerText.getText().subSequence(0, answerText.length()-1).toString().toLowerCase();
+        String userAnswer;
+        try {
+            userAnswer = answerText.getText().subSequence(0, answerText.length()-1).toString().toLowerCase();
+        } catch (Exception e) {
+            return;
+        }
 
         if (userAnswer.equals(lesson.levels.get(currentLevel).correctAnswer.toLowerCase())) {
             setNextLevel();
+            //showScore();
         } else {
             score -= 5;
+            //scoreText.setText("-5");
+            //showScore();
         }
     }
 
@@ -178,15 +190,23 @@ public class DisplayLessonActivity extends AppCompatActivity {
         if (!(++currentLevel >= lesson.levels.size())) {
             setLevel(lesson.levels.get(currentLevel));
             score += 10;
+            //scoreText.setText("+10");
+            //showScore();
             answerText.setText("");
         } else {
             score += 10;
+            //scoreText.setText("+10");
+            //showScore();
             database.updateLesson(lesson.id, userId, score);
             finish();
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
     }
+
+    /*private void showScore() {
+
+    }*/
 
     @Override
     public void onBackPressed() {

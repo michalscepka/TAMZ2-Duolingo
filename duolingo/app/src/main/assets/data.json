@@ -22,11 +22,11 @@
           "type": "sound",
           "description": "Vyberte co slyšíte",
           "data": [
-            "my",
+            "queen",
             "dog is a",
             "drama",
-            "king",
-            "queen"
+            "my",
+            "king"
           ],
           "correct_answer": "My dog is a drama king",
           "sound_file": "sound1"
@@ -50,9 +50,9 @@
           "description": "Vyberte co slyšíte",
           "data": [
             "I",
+            "hamburgers",
             "love",
             "pizza",
-            "hamburgers",
             "starving"
           ],
           "correct_answer": "I love hamburgers",
@@ -96,10 +96,10 @@
           "description": "Vyberte co slyšíte",
           "data": [
             "fishes",
-            "can",
+            "run",
             "swim",
             "jump",
-            "run"
+            "can"
           ],
           "correct_answer": "Fishes can swim",
           "sound_file": "sound3"
@@ -119,6 +119,20 @@
         },
         {
           "level_id": 4,
+          "type": "sound",
+          "description": "Vyberte co slyšíte",
+          "data": [
+            "elephants",
+            "horses",
+            "nose",
+            "long",
+            "have"
+          ],
+          "correct_answer": "Elephants have long nose",
+          "sound_file": "sound4"
+        },
+        {
+          "level_id": 5,
           "type": "pickFrom4",
           "description": "Na kterém obrázku je \"lev\"?",
           "data": [

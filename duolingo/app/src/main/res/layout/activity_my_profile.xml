@@ -35,14 +35,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:text="Změnit na vybraný profil" />
+        android:text="Změnit na vybraný profil"
+        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/buttonDeleteProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:text="Smazat vybraný profil" />
+        android:text="Smazat vybraný profil"
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/textView2"
@@ -64,6 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="Vytvořit nový profil" />
+        android:text="Vytvořit nový profil"
+        android:textColor="@color/white" />
 
 </LinearLayout>
