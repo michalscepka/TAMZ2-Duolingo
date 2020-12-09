@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -17,7 +18,6 @@ public class DisplayLessonActivity extends AppCompatActivity {
 
     private DBHelper database;
     private TextView descriptionTextView;
-    private TextView scoreText;
     private ArrayList<ImageView> imageViews;
     private ArrayList<TextView> textViews;
     private ImageButton playButton;
@@ -39,8 +39,6 @@ public class DisplayLessonActivity extends AppCompatActivity {
         database = new DBHelper(this);
 
         descriptionTextView = findViewById(R.id.descriptionTextView);
-        scoreText = findViewById(R.id.textScore);
-        scoreText.setText("");
 
         imageViews = new ArrayList<>();
         imageViews.add(findViewById(R.id.img1));
@@ -143,13 +141,12 @@ public class DisplayLessonActivity extends AppCompatActivity {
         return getResources().getIdentifier(level.data.get(index), "drawable", getPackageName());
     }
 
-    //TODO zobrazovat pocet prictenych a odectenych bodu
     public void onImageClick(View view) {
         if(String.valueOf(view.getTag()).equals(lesson.levels.get(currentLevel).correctAnswer)) {
             setNextLevel();
         } else {
             score -= 5;
-            //showScore();
+            Toast.makeText(this, "-5", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -166,19 +163,15 @@ public class DisplayLessonActivity extends AppCompatActivity {
 
     public void onButtonCheckClick(View view) {
         String userAnswer;
-        try {
+        if(answerText.getText().length() > 0) {
             userAnswer = answerText.getText().subSequence(0, answerText.length()-1).toString().toLowerCase();
-        } catch (Exception e) {
-            return;
-        }
 
-        if (userAnswer.equals(lesson.levels.get(currentLevel).correctAnswer.toLowerCase())) {
-            setNextLevel();
-            //showScore();
-        } else {
-            score -= 5;
-            //scoreText.setText("-5");
-            //showScore();
+            if (userAnswer.equals(lesson.levels.get(currentLevel).correctAnswer.toLowerCase())) {
+                setNextLevel();
+            } else {
+                score -= 5;
+                Toast.makeText(this, "-5", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -190,23 +183,17 @@ public class DisplayLessonActivity extends AppCompatActivity {
         if (!(++currentLevel >= lesson.levels.size())) {
             setLevel(lesson.levels.get(currentLevel));
             score += 10;
-            //scoreText.setText("+10");
-            //showScore();
+            Toast.makeText(this, "+10", Toast.LENGTH_SHORT).show();
             answerText.setText("");
         } else {
             score += 10;
-            //scoreText.setText("+10");
-            //showScore();
+            Toast.makeText(this, "+10", Toast.LENGTH_SHORT).show();
             database.updateLesson(lesson.id, userId, score);
             finish();
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
     }
-
-    /*private void showScore() {
-
-    }*/
 
     @Override
     public void onBackPressed() {

@@ -30,7 +30,6 @@ public class JsonTask extends AsyncTask<String, String, String> {
 
             while ((line = reader.readLine()) != null) {
                 buffer.append(line).append("\n");
-                //Log.d("Response: ", "> " + line);
             }
 
             //Log.d("Response: ", buffer.toString());

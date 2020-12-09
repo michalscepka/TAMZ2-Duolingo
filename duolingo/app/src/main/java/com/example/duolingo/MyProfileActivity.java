@@ -21,7 +21,6 @@ public class MyProfileActivity extends AppCompatActivity {
     private SharedPreferences sharedPref;
     private DBHelper database;
     private ArrayList<UserDB> users;
-    private Spinner spinner;
     private int selectedIndex;
 
     @Override
@@ -39,13 +38,26 @@ public class MyProfileActivity extends AppCompatActivity {
         Button changeProfileButton = findViewById(R.id.buttonChangeProfile);
         Button deleteProfileButton = findViewById(R.id.buttonDeleteProfile);
 
-        activeProfileText.setText(String.format("Aktivní profil: %s", users.get(sharedPref.getInt("activeProfile", 1) - 1).name));
+        int userId = sharedPref.getInt("activeProfile", 0);
+        int userIndex = 0;
+        
+        for(int i = 0; i < users.size(); i++) {
+            if (users.get(i).id == userId) {
+                userIndex = i;
+                break;
+            }
+        }
+
+        activeProfileText.setText(String.format("Aktivní profil: %s", users.get(userIndex).name));
 
         //zmena profilu
-        spinner = findViewById(R.id.spinner);
-        updateSpinner();
+        Spinner spinner = findViewById(R.id.spinner);
+        ArrayAdapter<UserDB> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, users);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
-        //TODO zkusit nezobrazovat furt default
+        spinner.setSelection(userIndex);
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -84,16 +96,9 @@ public class MyProfileActivity extends AppCompatActivity {
             if(!newName.equals("")) {
                 int newUserId = database.insertUser(newName);
                 sharedPref.edit().putInt("activeProfile", newUserId).apply();
-                //Toast.makeText(this, String.valueOf(sharedPref.getInt("activeProfile", 1)), Toast.LENGTH_SHORT).show();
                 restartActivity();
             }
         });
-    }
-
-    private void updateSpinner() {
-        ArrayAdapter<UserDB> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, users);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
     }
 
     private void restartActivity() {

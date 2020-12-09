@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences sharedPref;
     private UserDB activeProfile;
 
-    //TODO mozna udelat restart lekce s akcelerometrem
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,13 +52,9 @@ public class MainActivity extends AppCompatActivity {
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
-        //Log.d("log", output);
 
         JsonParser json = new JsonParser();
         lessons = json.loadLessons(output);
-        /*for(Lesson item : lessons) {
-            Log.d("log ", item.toString());
-        }*/
 
         assignScore();
 
@@ -73,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), DisplayLessonActivity.class);
             intent.putExtra("lesson", lessons.get(selectedLesson.id - 1));
             intent.putExtra("userId", activeProfile.id);
-            //Log.d("log", "\n\nID " + (selectedLesson.id - 1));
             startActivity(intent);
             finish();
         });

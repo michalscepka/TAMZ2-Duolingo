@@ -35,12 +35,12 @@ public class LessonListAdapter extends ArrayAdapter<Lesson> {
 
         Lesson lesson = data.get(position);
 
-        TextView txt1 = (TextView)row.findViewById(R.id.lessonNameText);
-        TextView txt2 = (TextView)row.findViewById(R.id.scoreText);
-        ImageView imgLesson = (ImageView)row.findViewById(R.id.imgLesson);
-        ImageView imgStar1 = (ImageView)row.findViewById(R.id.imgStar1);
-        ImageView imgStar2 = (ImageView)row.findViewById(R.id.imgStar2);
-        ImageView imgStar3 = (ImageView)row.findViewById(R.id.imgStar3);
+        TextView txt1 = row.findViewById(R.id.lessonNameText);
+        TextView txt2 = row.findViewById(R.id.scoreText);
+        ImageView imgLesson = row.findViewById(R.id.imgLesson);
+        ImageView imgStar1 = row.findViewById(R.id.imgStar1);
+        ImageView imgStar2 = row.findViewById(R.id.imgStar2);
+        ImageView imgStar3 = row.findViewById(R.id.imgStar3);
 
         txt1.setText(lesson.name);
         txt2.setText(String.format("Score: %s", lesson.score));
