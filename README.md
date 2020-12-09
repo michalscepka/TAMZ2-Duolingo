@@ -1,17 +1,18 @@
 # TAMZ2-Duolingo
 
-Android application for learning languages. Project for Mobile Application Development course 2 at VŠB-TUO.
+Projekt pro předmět Tvorba aplikací pro mobilní zařízení II na VŠB-TUO.
 
 <b>Description:</b>
+Zjednodušená verze android aplikace pro výuku jazyků Duolingo.
 
 <b>Features:</b>
 
-> PersistentStorage
+> Persistent Storage (SharedPreferences) – ukládání aktuálně zvoleného profilu
 
-> Audio
+> Multimedia (Audio) - některé levely mají zvuky
 
-> Advanced GUI - Lists
+> Advanced GUI (Lists) - hlavní menu, vlastní ArrayAdapter
 
-> Networking + AsyncTask - JSON
+> Concurrency + Networking (AsyncTask + JSON) - stahování JSON souboru s daty pro lekce
 
-> SQLite
+> Database (SQLite) - ukládání skóre v lekcích pro jednotlivé profily
