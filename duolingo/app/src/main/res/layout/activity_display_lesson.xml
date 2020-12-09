@@ -227,4 +227,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/speaker" />
 
+    <TextView
+        android:id="@+id/textAlert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="Špatně :("
+        android:textColor="@color/pink4"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

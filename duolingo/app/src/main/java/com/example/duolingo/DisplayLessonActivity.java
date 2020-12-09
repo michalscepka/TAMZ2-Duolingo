@@ -30,6 +30,7 @@ public class DisplayLessonActivity extends AppCompatActivity {
     private int score;
     private int userId;
     private MediaPlayer mediaPlayer;
+    private TextView alertText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,9 @@ public class DisplayLessonActivity extends AppCompatActivity {
         answerButtons.add(findViewById(R.id.buttonOption5));
         checkButton = findViewById(R.id.buttonCheck);
         clearButton = findViewById(R.id.buttonClear);
+
+        alertText = findViewById((R.id.textAlert));
+        alertText.setVisibility(View.GONE);
 
         for(ImageView item : imageViews) {
             item.setVisibility(View.GONE);
@@ -145,8 +149,7 @@ public class DisplayLessonActivity extends AppCompatActivity {
         if(String.valueOf(view.getTag()).equals(lesson.levels.get(currentLevel).correctAnswer)) {
             setNextLevel();
         } else {
-            score -= 5;
-            Toast.makeText(this, "-5", Toast.LENGTH_SHORT).show();
+            wrongAnswer();
         }
     }
 
@@ -169,8 +172,7 @@ public class DisplayLessonActivity extends AppCompatActivity {
             if (userAnswer.equals(lesson.levels.get(currentLevel).correctAnswer.toLowerCase())) {
                 setNextLevel();
             } else {
-                score -= 5;
-                Toast.makeText(this, "-5", Toast.LENGTH_SHORT).show();
+                wrongAnswer();
             }
         }
     }
@@ -183,16 +185,24 @@ public class DisplayLessonActivity extends AppCompatActivity {
         if (!(++currentLevel >= lesson.levels.size())) {
             setLevel(lesson.levels.get(currentLevel));
             score += 10;
+            alertText.setVisibility(View.GONE);
             Toast.makeText(this, "+10", Toast.LENGTH_SHORT).show();
             answerText.setText("");
         } else {
             score += 10;
+            alertText.setVisibility(View.GONE);
             Toast.makeText(this, "+10", Toast.LENGTH_SHORT).show();
             database.updateLesson(lesson.id, userId, score);
             finish();
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
+    }
+
+    private void wrongAnswer() {
+        score -= 5;
+        alertText.setVisibility(View.VISIBLE);
+        Toast.makeText(this, "-5", Toast.LENGTH_SHORT).show();
     }
 
     @Override
